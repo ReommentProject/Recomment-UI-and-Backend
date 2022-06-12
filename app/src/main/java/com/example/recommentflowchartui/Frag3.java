@@ -58,8 +58,16 @@ public class Frag3 extends Fragment {
         friendlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //RequestActivity에서 전달한 번들 저장
+                Bundle bundle = getArguments();
+                //번들 안의 텍스트 불러오기
+                String userId = bundle.getString("userId");
                 Intent intent=new Intent(getActivity(),Friendlist.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
+
+
             }
         });
 

@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -57,6 +59,13 @@ public class Mainpage extends AppCompatActivity {
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).commit();
+
+                String userId = (String) getIntent().getSerializableExtra("userId");
+                Bundle bundle = new Bundle();
+                bundle.putString("userId",userId);
+                fragment.setArguments(bundle);
+                Log.d("fuckkkk", userId);
+
                 return true;
             }
         });
