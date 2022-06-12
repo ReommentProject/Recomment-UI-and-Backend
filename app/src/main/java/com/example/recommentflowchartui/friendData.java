@@ -11,6 +11,11 @@ public class friendData {
         this.name = name;
         this.content = content;
     }
+    public friendData(int fprofile, String name) {
+        this.fprofile = fprofile;
+        this.name = name;
+        this.content = "아직모름";
+    }
 
     public int getFprofile() {
         return fprofile;

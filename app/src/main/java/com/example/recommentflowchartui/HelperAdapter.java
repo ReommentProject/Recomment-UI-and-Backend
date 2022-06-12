@@ -39,9 +39,9 @@ public class HelperAdapter extends RecyclerView.Adapter {
         viewHolderClass.textView1.setText(contentList.get(position).getTitle());
         viewHolderClass.textView2.setText(contentList.get(position).getContent());
 
+        String url2=contentList.get(position).getThumbnail();
         String url="https://youtu.be/JNL44p5kzTk";
-        String id = url.substring(url.lastIndexOf("/")+1);  //맨마지막 '/'뒤에 id가있으므로 그것만 파싱해줌
-        Log.d("파싱한 아이디id 값", id);
+        String id = url.substring(17);  //맨마지막 '/'뒤에 id가있으므로 그것만 파싱해줌
         String imgUrl ="https://img.youtube.com/vi/"+ id+ "/" + "default.jpg";  //유튜브 썸네일 불러오는 방법
         Glide.with(context).load(imgUrl).into(viewHolderClass.imageView);
         viewHolderClass.imageView.setVisibility(View.VISIBLE); //동영상이면 재생버튼도 보이게한다.

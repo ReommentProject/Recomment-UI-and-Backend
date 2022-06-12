@@ -29,7 +29,7 @@ public class Frag1 extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
 
 
-        return getPosts(view);
+        return getFriendsPosts(view);
 
 //        Log.i("fuck", "image size : "+images.size());
 //        Log.i("fuck", "name size : "+name.size());
@@ -37,9 +37,10 @@ public class Frag1 extends Fragment {
 
     }
 
-    private View getPosts(View view) {
+    private View getFriendsPosts(View view) {
 
         Call<List<Content>> call = RetrofitClient.getInstance().getMyApi().getPosts();
+//        Call<List<Friend>> call2 = RetrofitClient.getInstance().getMyApi().getFriends();
 
         call.enqueue(new Callback<List<Content>>() {
             @Override
@@ -48,6 +49,7 @@ public class Frag1 extends Fragment {
                 List<Content> postList = response.body();
 
                 Log.i("fuck", ""+response.body().size());
+
 
                 HelperAdapter helperAdapter = new HelperAdapter(getContext(), postList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

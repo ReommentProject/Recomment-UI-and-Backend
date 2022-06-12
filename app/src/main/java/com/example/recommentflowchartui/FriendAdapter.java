@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomViewHolder> {
 
 
-    private ArrayList<friendData> arrayList;
+    private List<friendData> arrayList;
 
 
-    public FriendAdapter(ArrayList<friendData> arrayList) {
+    public FriendAdapter(List<friendData> arrayList) {
         this.arrayList = arrayList;
     }
 

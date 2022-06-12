@@ -16,9 +16,11 @@ public interface Api {
     @POST("user")
     Call<User> createUser(@Body User user);
 
-
     @GET("post")
     Call<List<Content>> getPosts();
+
+    @GET("friend")
+    Call<List<Friend>> getFriends();
 
 
 }
