@@ -30,9 +30,9 @@ public class Friendlist extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_friendlist);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
@@ -43,17 +43,16 @@ public class Friendlist extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList = new ArrayList<>();
-        friendAdapter = new FriendAdapter(arrayList);
-        recyclerView.setAdapter(friendAdapter);
+
+
+
 
         getFriends(arrayList);
 
-        for (int i = 0; i < 50; i++) {
-            friendData friendData = new friendData(R.mipmap.ic_launcher, "친구 닉네임", "관심있는 카테고리");
-            arrayList.add(friendData);
-        }
-
-
+//        for (int i = 0; i < 50; i++) {
+//            friendData friendData = new friendData(R.mipmap.ic_launcher, "친구 닉네임", "관심있는 카테고리");
+//            arrayList.add(friendData);
+//        }
     }
 
 
@@ -66,17 +65,20 @@ public class Friendlist extends AppCompatActivity {
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
 
                 List<Friend> friendsList = response.body();
-                Log.i("fuck", ""+array.size());
+                Log.i("fuck", "this fucks!"+array.size());
 
                 for(int i=0;i<friendsList.size();i++){
                     friendsList.get(i).getUser_Id();
                     String myFriend = friendsList.get(i).getFriend_Id();
-                    friendData friend1 = new friendData(R.mipmap.ic_launcher, myFriend);
+                    friendData friend1 = new friendData(R.mipmap.ic_launcher, ""+myFriend, "fuck!");
                     array.add(friend1);
                 }
 
+                friendAdapter = new FriendAdapter(arrayList);
+                recyclerView.setAdapter(friendAdapter);
+
                 Log.i("fuck", ""+array.size());
-                Log.i("fuck", ""+array.get(1).getContent()+array.get(54).getContent());
+//                Log.i("fuck", ""+array.get(1).getContent()+array.get(54).getContent());
 
 
 //                HelperAdapter helperAdapter = new HelperAdapter(getContext(), postList);

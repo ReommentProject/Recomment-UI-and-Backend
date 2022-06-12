@@ -76,6 +76,7 @@ public class Loginpage extends AppCompatActivity {
 
                     if(GetId.equals(DBId)&&GetPwd.equals(DBPwd)){
                         Intent intent=new Intent(Loginpage.this,Mainpage.class);
+                        intent.putExtra("userId", GetId);
                         startActivity(intent);
                         rightInput=true;
                         break;
