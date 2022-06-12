@@ -36,16 +36,11 @@ public class Friendlist extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
-
         recyclerView = (RecyclerView) findViewById(R.id.friendlist);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList = new ArrayList<>();
-
-
-
 
         getFriends(arrayList);
 
