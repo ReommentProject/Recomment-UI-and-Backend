@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,15 +44,20 @@ public class Friendlist extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         getFriends(arrayList);
-
-//        for (int i = 0; i < 50; i++) {
-//            friendData friendData = new friendData(R.mipmap.ic_launcher, "친구 닉네임", "관심있는 카테고리");
-//            arrayList.add(friendData);
-//        }
     }
 
 
     private void getFriends(List<friendData> array) {
+
+
+        String userId = (String) getIntent().getSerializableExtra("userId");
+
+        Log.d("fuckuserId", userId);
+//        Intent intent=new Intent(Signup_page2.this,Signup_finish.class);
+//        intent.putExtra("createdUser", cUser);
+//        startActivity(intent);
+
+
 
         Call<List<Friend>> call = RetrofitClient.getInstance().getMyApi().getFriends();
 
@@ -60,26 +66,17 @@ public class Friendlist extends AppCompatActivity {
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
 
                 List<Friend> friendsList = response.body();
-                Log.i("fuck", "this fucks!"+array.size());
 
                 for(int i=0;i<friendsList.size();i++){
-                    friendsList.get(i).getUser_Id();
-                    String myFriend = friendsList.get(i).getFriend_Id();
-                    friendData friend1 = new friendData(R.mipmap.ic_launcher, ""+myFriend, "fuck!");
-                    array.add(friend1);
+                    if(friendsList.get(i).getUser_Id().equals(userId)) {
+                        String myFriend = friendsList.get(i).getFriend_Id();
+                        friendData friend1 = new friendData(R.mipmap.ic_launcher, "" + myFriend, "fuck!");
+                        array.add(friend1);
+                    }
                 }
 
                 friendAdapter = new FriendAdapter(arrayList);
                 recyclerView.setAdapter(friendAdapter);
-
-                Log.i("fuck", ""+array.size());
-//                Log.i("fuck", ""+array.get(1).getContent()+array.get(54).getContent());
-
-
-//                HelperAdapter helperAdapter = new HelperAdapter(getContext(), postList);
-//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//                recyclerView.setLayoutManager(linearLayoutManager);
-//                recyclerView.setAdapter(helperAdapter);
             }
 
             @Override
