@@ -33,7 +33,14 @@ public class Mainpage extends AppCompatActivity {
         setContentView(R.layout.activity_mainpage);
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Frag1()).commit();
+
+        String userId = (String) getIntent().getSerializableExtra("userId");
+        Bundle bundle = new Bundle();
+        bundle.putString("userId",userId);
+        Fragment fragment = new Frag1();
+        fragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).commit();
 
         bottomNavigationView=findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,6 +52,7 @@ public class Mainpage extends AppCompatActivity {
                     case R.id.action_friends:
                         //fragment= new Fragment1();
                         fragment = new Frag1();
+                        fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.add(R.id.main_frame, fragment);
@@ -52,18 +60,20 @@ public class Mainpage extends AppCompatActivity {
                         break;
                     case R.id.action_usergroup:
                         fragment = new Frag2();
+                        fragment.setArguments(bundle);
                         break;
                     case R.id.action_Mypage:
                         fragment = new Frag3();
+                        fragment.setArguments(bundle);
                         break;
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).commit();
 
-                String userId = (String) getIntent().getSerializableExtra("userId");
-                Bundle bundle = new Bundle();
-                bundle.putString("userId",userId);
-                fragment.setArguments(bundle);
+//                String userId = (String) getIntent().getSerializableExtra("userId");
+//                Bundle bundle = new Bundle();
+//                bundle.putString("userId",userId);
+//                fragment.setArguments(bundle);
                 Log.d("fuckkkk", userId);
 
                 return true;
