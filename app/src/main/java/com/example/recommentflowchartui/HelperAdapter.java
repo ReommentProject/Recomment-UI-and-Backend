@@ -47,14 +47,17 @@ public class HelperAdapter extends RecyclerView.Adapter {
         viewHolderClass.writer.setText(contentList.get(position).getUser_Id());
         viewHolderClass.likes.setText("좋아영: "+Integer.toString(contentList.get(position).getLikes())+"");
 
-        // 작성 시간 불러내기
-        String temp = contentList.get(position).getCreatedTime();
-        String temp2 = temp.substring(0, 10);
-        String temp3 = temp.substring(11, 19);
-        String temp4 = temp2 + " " + temp3;
+
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
+            // 작성 시간 불러내기
+            String temp = contentList.get(position).getCreatedTime();
+            Log.i("fucking created time : ", ""+temp);
+            String temp2 = temp.substring(0, 10);
+            String temp3 = temp.substring(11, 19);
+            String temp4 = temp2 + " " + temp3;
+
             Date writtenTime = formatter.parse(temp4);
 
             long Wtime = writtenTime.getTime();

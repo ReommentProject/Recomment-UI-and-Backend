@@ -16,7 +16,7 @@
         android:textStyle="italic"
         android:fontFamily="@font/font"
         android:textSize="30sp"
-        android:text="Profile" />
+        android:text="  Profile" />
     <Button
         android:layout_width="170dp"
         android:id="@+id/goupload"
@@ -33,7 +33,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Category"
+        android:text="  Category"
         android:layout_marginTop="200dp"
         android:textColor="#000000"
         android:textSize="30sp"
@@ -45,7 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:layout_marginTop="250dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="5dp"
         android:scrollbarThumbVertical="@android:color/darker_gray"
