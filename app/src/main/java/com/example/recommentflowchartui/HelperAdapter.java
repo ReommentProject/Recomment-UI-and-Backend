@@ -41,6 +41,9 @@ public class HelperAdapter extends RecyclerView.Adapter {
 
         String url2=contentList.get(position).getThumbnail();
         String url="https://youtu.be/JNL44p5kzTk";
+
+
+
         String id = url.substring(17);  //맨마지막 '/'뒤에 id가있으므로 그것만 파싱해줌
         String imgUrl ="https://img.youtube.com/vi/"+ id+ "/" + "default.jpg";  //유튜브 썸네일 불러오는 방법
         Glide.with(context).load(imgUrl).into(viewHolderClass.imageView);
