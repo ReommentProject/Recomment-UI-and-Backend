@@ -5,6 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.ScaleAnimation;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,11 +20,9 @@ import com.bumptech.glide.Glide;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.Date;
 import java.util.List;
+
 
 public class HelperAdapter extends RecyclerView.Adapter {
     Context context;
@@ -62,6 +64,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
 
             long Wtime = writtenTime.getTime();
             long Ntime = System.currentTimeMillis();
+            Log.i("fucking created time : ", ""+formatter.format(Ntime));
 
             long second = 1000;
             long minute = second * 60;
@@ -71,7 +74,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
             long month = week * 4;
             long year = month * 12;
 
-            long fuckfuck = Ntime-Wtime-(9*hour);
+            long fuckfuck = Ntime-Wtime;
 
             if(fuckfuck < minute){
                 viewHolderClass.writtenAt.setText((fuckfuck/second) + "초전");
@@ -106,6 +109,22 @@ public class HelperAdapter extends RecyclerView.Adapter {
                 Toast.makeText(context,"Item Selected",Toast.LENGTH_LONG).show();
             }
         });
+
+        ScaleAnimation scaleAnimation;
+        BounceInterpolator bounceInterpolator;//애니메이션이 일어나는 동안의 회수, 속도를 조절하거나 시작과 종료시의 효과를 추가 할 수 있다
+
+        scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
+
+        scaleAnimation.setDuration(500);
+        bounceInterpolator = new BounceInterpolator();
+        scaleAnimation.setInterpolator(bounceInterpolator);
+
+        viewHolderClass.likeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                compoundButton.startAnimation(scaleAnimation);
+            }
+        });
     }
 
     @Override
@@ -116,6 +135,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
     {
         TextView textView1, textView2, writer, likes, writtenAt;
         ImageView imageView;
+        CompoundButton likeBtn;
         public ViewHolderClass(@NonNull View itemView) {
             super(itemView);
             textView1=(TextView)itemView.findViewById(R.id.textView1);
@@ -124,6 +144,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
             likes = (TextView)itemView.findViewById(R.id.likes);
             writtenAt = (TextView)itemView.findViewById(R.id.writtenAt);
             imageView=(ImageView) itemView.findViewById(R.id.imageview);
+            likeBtn=(CompoundButton) itemView.findViewById(R.id.likeBtn);
         }
     }
 }
