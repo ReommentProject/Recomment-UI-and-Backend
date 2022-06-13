@@ -16,6 +16,7 @@
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/layout/activity_post_page.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/layout/activity_see_profile.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/layout/activity_signup_page2.xml" value="0.24947916666666667" />
+<<<<<<< HEAD
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/layout/display_item.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/layout/frag2.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/layout/frag3.xml" value="0.17864583333333334" />
@@ -25,6 +26,8 @@
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/layout/toast_board.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/menu/bottom_menu.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/6843w/AndroidStudioProjects/Recomment-UI-and-Backend/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+=======
+>>>>>>> 0253b6dfe4a9f8aa39ca3014e6a4b4bbe6762e35
         <entry key="..\:/Users/tlsgy/Recomment flowchart UI/app/src/main/res/drawable-v24/gradation2.xml" value="0.1" />
         <entry key="..\:/Users/tlsgy/Recomment flowchart UI/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/tlsgy/Recomment flowchart UI/app/src/main/res/drawable/buttondesign.xml" value="0.1205" />
@@ -56,7 +59,19 @@
         <entry key="..\:/Users/tlsgy/Recomment flowchart UI/app/src/main/res/menu/main_menu.xml" value="0.10833333333333334" />
         <entry key="..\:/Users/tlsgy/Recomment flowchart UI/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/tlsgy/Recomment flowchart UI/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+<<<<<<< HEAD
         <entry key="app/src/main/res/layout/display_item.xml" value="0.16111111111111112" />
+=======
+        <entry key="app/src/main/res/drawable/heart_selector.xml" value="0.1115" />
+        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1115" />
+        <entry key="app/src/main/res/drawable/ic_heart_red.xml" value="0.1115" />
+        <entry key="app/src/main/res/layout/activity_friendlist.xml" value="0.26313405797101447" />
+        <entry key="app/src/main/res/layout/activity_mainpage.xml" value="0.34730529785156256" />
+        <entry key="app/src/main/res/layout/display_item.xml" value="0.3075601374570447" />
+        <entry key="app/src/main/res/layout/frag1.xml" value="0.16111111111111112" />
+        <entry key="app/src/main/res/layout/frag3.xml" value="0.20982536462785747" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.10612968591691996" />
+>>>>>>> 0253b6dfe4a9f8aa39ca3014e6a4b4bbe6762e35
       </map>
     </option>
   </component>
