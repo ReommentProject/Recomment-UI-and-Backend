@@ -34,7 +34,15 @@ public class Mainpage extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
 
-        String userId = (String) getIntent().getSerializableExtra("userId");
+        String userId;
+        if(getIntent().getSerializableExtra("createdUser")!=null){
+
+            User createdUser = (User) getIntent().getSerializableExtra("createdUser");
+            userId = createdUser.getUser_Id();
+        }
+        else {
+            userId = (String) getIntent().getSerializableExtra("userId");
+        }
         Bundle bundle = new Bundle();
         bundle.putString("userId",userId);
         Fragment fragment = new Frag1();

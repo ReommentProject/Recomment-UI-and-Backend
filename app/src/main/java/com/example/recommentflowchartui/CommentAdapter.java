@@ -7,42 +7,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomViewHolder> {
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CustomViewHolder> {
 
 
-    private List<friendData> arrayList;
+    private ArrayList<CommentData> arrayList;
     private Context mContext;
 
 
-    public FriendAdapter(List<friendData> arrayList) {
+    public CommentAdapter(ArrayList<CommentData> arrayList) {
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public FriendAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext=parent.getContext();
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friendlist,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item_commentlist,parent,false);
         CustomViewHolder holder=new CustomViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FriendAdapter.CustomViewHolder holder, int position) {
-        holder.fprofile.setImageResource(arrayList.get(position).getFprofile());
-        holder.name.setText(arrayList.get(position).getName());
-        holder.content.setText(arrayList.get(position).getContent());
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+        holder.commentprofile.setImageResource(arrayList.get(position).getCommentProfile());
+        holder.commentnick.setText(arrayList.get(position).getCommentNick());
+        holder.comment.setText(arrayList.get(position).getComment());
         holder.itemView.setTag(position);
 
 
@@ -57,19 +52,20 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        protected ImageView fprofile;
-        protected TextView name;
-        protected TextView content;
+        protected ImageView commentprofile;
+        protected TextView commentnick;
+        protected TextView comment;
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.fprofile=(ImageView) itemView.findViewById(R.id.fprofile);
-            this.name=(TextView) itemView.findViewById(R.id.name);
-            this.content=(TextView) itemView.findViewById(R.id.content);
-            fprofile.setOnClickListener(new View.OnClickListener() {
+            this.commentprofile=(ImageView) itemView.findViewById(R.id.commentprofile);
+            this.commentnick=(TextView) itemView.findViewById(R.id.commentncik);
+            this.comment=(TextView) itemView.findViewById(R.id.comment);
+
+            commentprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int currentPos=getAdapterPosition();
-                    friendData friendData=arrayList.get(currentPos);
+                    CommentData commentData=arrayList.get(currentPos);
                     Intent intent=new Intent(mContext,FriendPage.class);
                     mContext.startActivity(intent);
 

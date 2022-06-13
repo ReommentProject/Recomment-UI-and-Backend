@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ public class Frag3 extends Fragment {
     private CategoryAdapter categoryAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+    private TextView profile;
 
 
 
@@ -34,6 +36,7 @@ public class Frag3 extends Fragment {
         view=inflater.inflate(R.layout.frag3,container,false);
         friendlist=view.findViewById(R.id.seefriend);
         recomment=view.findViewById(R.id.goupload);
+        profile=view.findViewById(R.id.myprofile);
         recyclerView=view.findViewById(R.id.recyclerView3);
         linearLayoutManager=new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -41,28 +44,40 @@ public class Frag3 extends Fragment {
         arrayList=new ArrayList<>();
         categoryAdapter=new CategoryAdapter(arrayList);
         recyclerView.setAdapter(categoryAdapter);
-        for(int i=0 ; i<50 ; i++)
+
+        //RequestActivity에서 전달한 번들 저장
+        Bundle bundle = getArguments();
+        //번들 안의 텍스트 불러오기
+        String userId = bundle.getString("userId");
+
+
+        for(int i=0 ; i<10 ; i++)
         {
             CategoryData categoryData=new CategoryData(R.drawable.star,"카테고리");
             arrayList.add(categoryData);
         }
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),SeeProfile.class);
+                intent.putExtra("userId", userId);
+                startActivity(intent);
+            }
+        });
 
         recomment.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(),upload_page.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
         friendlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //RequestActivity에서 전달한 번들 저장
-                Bundle bundle = getArguments();
-                //번들 안의 텍스트 불러오기
-                String userId = bundle.getString("userId");
                 Intent intent=new Intent(getActivity(),Friendlist.class);
                 intent.putExtra("userId", userId);
                 startActivity(intent);

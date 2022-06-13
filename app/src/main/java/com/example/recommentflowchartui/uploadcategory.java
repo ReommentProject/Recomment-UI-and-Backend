@@ -3,9 +3,11 @@ package com.example.recommentflowchartui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,13 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class uploadcategory extends AppCompatActivity {
     private Button finishupload;
@@ -37,15 +46,44 @@ public class uploadcategory extends AppCompatActivity {
         listViewData=findViewById(R.id.listView_data);
         adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice,arrayPeliculas);
         listViewData.setAdapter(adapter);
+        String userId = (String) getIntent().getSerializableExtra("userId");
+        Log.d("fuckgetid",userId);
         finishupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                User cUser = (User) getIntent().getSerializableExtra("createdUser");
+                if (getIntent().getSerializableExtra("createdUser") != null) {
+                    User cUser = (User) getIntent().getSerializableExtra("createdUser");
 
-                Intent intent=new Intent(uploadcategory.this,Mainpage.class);
-                intent.putExtra("createdUser", cUser);
-                startActivity(intent);
+                    Log.d("fuckgetcUserid1",cUser.getUser_Id());
+
+                    Intent intent=new Intent(uploadcategory.this,Mainpage.class);
+                    intent.putExtra("createdUser", cUser);
+                    startActivity(intent);
+                }
+
+                else{
+                    Call<User> call2 = RetrofitClient.getInstance().getMyApi().getOneUser(userId);
+                    call2.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call2, Response<User> response2) {
+                            User cUser = response2.body();
+
+                            Log.d("fuckgetcUserid2",cUser.getUser_Id());
+
+                            Intent intent=new Intent(uploadcategory.this,Mainpage.class);
+                            intent.putExtra("createdUser", cUser);
+                            startActivity(intent);
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call2, Throwable t2) {
+                            Toast.makeText(getApplicationContext(), "An error has occured in get", Toast.LENGTH_LONG).show();
+                        }
+
+                    });
+                }
             }
         });
 

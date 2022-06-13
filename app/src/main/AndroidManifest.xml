@@ -13,6 +13,24 @@
         android:theme="@style/Theme.RecommentFlowchartUI"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CategoryVideoList"
+            android:exported="false" />
+        <activity
+            android:name=".MakeComments"
+            android:exported="false" />
+        <activity
+            android:name=".Commentlist"
+            android:exported="false" />
+        <activity
+            android:name=".SeeProfile"
+            android:exported="false" />
+        <activity
+            android:name=".OtherPage"
+            android:exported="false" />
+        <activity
+            android:name=".FriendPage"
+            android:exported="false" />
+        <activity
             android:name=".uploadcategory"
             android:exported="false" />
         <activity

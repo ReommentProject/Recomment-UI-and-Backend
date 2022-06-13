@@ -29,6 +29,8 @@ public class Frag1 extends Fragment {
         View view = inflater.inflate(R.layout.frag1, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
 
+
+
         Bundle bundle = getArguments();
         String userId = bundle.getString("userId");
 

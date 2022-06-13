@@ -1,5 +1,7 @@
 package com.example.recommentflowchartui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
 
 
     private ArrayList<CategoryData> arrayList;
+    private Context mContext;
 
 
     public CategoryAdapter(ArrayList<CategoryData> arrayList) {
@@ -27,7 +30,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
     @NonNull
     @Override
     public CategoryAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+        mContext=parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category,parent,false);
         CustomViewHolder holder=new CustomViewHolder(view);
         return holder;
@@ -57,6 +60,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
             super(itemView);
             this.star=(ImageView) itemView.findViewById(R.id.star);
             this.cname=(TextView) itemView.findViewById(R.id.cname);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int currentPos=getAdapterPosition();
+                    CategoryData categoryData=arrayList.get(currentPos);
+                    Intent intent=new Intent(mContext,CategoryVideoList.class);
+                    mContext.startActivity(intent);
+
+                }
+            });
         }
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradation1"
+    tools:context=".Signup_finish">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Make Comments"
+            android:textColor="#000000"
+            android:textSize="50sp" />
+
+        <EditText
+            android:id="@+id/profile"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/buttondesign4"
+            android:fontFamily="@font/font"
+            android:hint="make comments"
+            android:padding="10dp"
+            android:textSize="30dp" />
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/buttondesign"
+            android:fontFamily="@font/font"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="Finish"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+</LinearLayout>

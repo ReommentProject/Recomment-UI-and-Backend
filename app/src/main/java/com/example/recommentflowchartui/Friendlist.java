@@ -23,7 +23,7 @@ import retrofit2.Response;
 
 public class Friendlist extends AppCompatActivity {
 
-    private List<friendData> arrayList;
+    private ArrayList<friendData> arrayList;
     private FriendAdapter friendAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -31,9 +31,9 @@ public class Friendlist extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friendlist);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_friendlist);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
@@ -51,6 +51,7 @@ public class Friendlist extends AppCompatActivity {
 
 
         String userId = (String) getIntent().getSerializableExtra("userId");
+
 
         Log.d("fuckuserId", userId);
 //        Intent intent=new Intent(Signup_page2.this,Signup_finish.class);
