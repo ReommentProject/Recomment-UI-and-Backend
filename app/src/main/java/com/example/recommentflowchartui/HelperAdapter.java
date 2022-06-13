@@ -2,6 +2,7 @@ package com.example.recommentflowchartui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,6 +115,9 @@ public class HelperAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context,"Item Selected",Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(context,post_page.class);
+                intent.putExtra("this_post", postList.get(position));
+                context.startActivity(intent);
             }
         });
 
