@@ -122,6 +122,11 @@ public class HelperAdapter extends RecyclerView.Adapter {
         viewHolderClass.likeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    viewHolderClass.likes.setText("좋아영: " + Integer.toString(contentList.get(position).getLikes()+1) + "");
+                }else{
+                    viewHolderClass.likes.setText("좋아영: " + Integer.toString(contentList.get(position).getLikes()) + "");
+                }
                 compoundButton.startAnimation(scaleAnimation);
             }
         });
