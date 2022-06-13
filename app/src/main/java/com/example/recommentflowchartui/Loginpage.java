@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.recommentflowchartui.DTO.User;
+
 import java.util.List;
 
 import retrofit2.Call;

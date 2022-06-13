@@ -15,10 +15,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.recommentflowchartui.DTO.User;
 
 public class Signup_page2 extends AppCompatActivity {
     private Button next2;

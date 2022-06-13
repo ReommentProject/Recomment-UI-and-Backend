@@ -1,13 +1,13 @@
-package com.example.recommentflowchartui;
+package com.example.recommentflowchartui.DTO;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Content implements Serializable {
+public class Post implements Serializable {
 
     @SerializedName("id")
-    private String post_Id;
+    private int post_Id;
 
     @SerializedName("userId")
     private String user_Id;
@@ -34,7 +34,7 @@ public class Content implements Serializable {
     private String updatedTime;
 
 
-    public Content(String post_Id, String user_Id, int likes, String title, String content, String thumbnail, String link, String createdTime, String updatedTime) {
+    public Post(int post_Id, String user_Id, int likes, String title, String content, String thumbnail, String link, String createdTime, String updatedTime) {
         this.post_Id = post_Id;
         this.user_Id = user_Id;
         this.likes = likes;
@@ -46,7 +46,7 @@ public class Content implements Serializable {
         this.updatedTime = updatedTime;
     }
 
-    public String getPost_Id() {
+    public int getPost_Id() {
         return post_Id;
     }
 

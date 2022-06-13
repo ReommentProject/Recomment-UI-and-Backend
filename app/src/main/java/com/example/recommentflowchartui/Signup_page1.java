@@ -3,7 +3,6 @@ package com.example.recommentflowchartui;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.recommentflowchartui.DTO.User;
 
 public class Signup_page1 extends AppCompatActivity {
     private Button next;

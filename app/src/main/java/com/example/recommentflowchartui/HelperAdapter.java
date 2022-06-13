@@ -1,5 +1,6 @@
 package com.example.recommentflowchartui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,20 +18,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.recommentflowchartui.DTO.Intt;
+import com.example.recommentflowchartui.DTO.Post;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class HelperAdapter extends RecyclerView.Adapter {
     Context context;
-    List<Content> contentList;
+    List<Post> postList;
 
-    public HelperAdapter(Context context, List<Content> contentList) {
+    public HelperAdapter(Context context, List<Post> postList) {
         this.context = context;
-        this.contentList = contentList;
+        this.postList = postList;
     }
 
     @NonNull
@@ -42,19 +49,19 @@ public class HelperAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ViewHolderClass viewHolderClass=(ViewHolderClass)holder;
-        viewHolderClass.textView1.setText(contentList.get(position).getTitle());
-        viewHolderClass.textView2.setText("> "+contentList.get(position).getContent());
-        viewHolderClass.writer.setText(contentList.get(position).getUser_Id());
-        viewHolderClass.likes.setText("좋아영: "+Integer.toString(contentList.get(position).getLikes())+"");
+        viewHolderClass.textView1.setText(postList.get(position).getTitle());
+        viewHolderClass.textView2.setText("> "+ postList.get(position).getContent());
+        viewHolderClass.writer.setText(postList.get(position).getUser_Id());
+        viewHolderClass.likes.setText("좋아영: "+Integer.toString(postList.get(position).getLikes())+"");
 
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             // 작성 시간 불러내기
-            String temp = contentList.get(position).getCreatedTime();
+            String temp = postList.get(position).getCreatedTime();
             Log.i("fucking created time : ", ""+temp);
             String temp2 = temp.substring(0, 10);
             String temp3 = temp.substring(11, 19);
@@ -95,7 +102,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
             e.printStackTrace();
         }
 
-        String url=contentList.get(position).getThumbnail();
+        String url= postList.get(position).getThumbnail();
         String url2="https://youtu.be/JNL44p5kzTk";
 
         String id = url.substring(17);  //맨마지막 '/'뒤에 id가있으므로 그것만 파싱해줌
@@ -123,9 +130,11 @@ public class HelperAdapter extends RecyclerView.Adapter {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked) {
-                    viewHolderClass.likes.setText("좋아영: " + Integer.toString(contentList.get(position).getLikes()+1) + "");
+                    increaseLikes(postList.get(position).getPost_Id());
+                    viewHolderClass.likes.setText("좋아영: " + Integer.toString(postList.get(position).getLikes()+1) + "");
                 }else{
-                    viewHolderClass.likes.setText("좋아영: " + Integer.toString(contentList.get(position).getLikes()) + "");
+                    decreaseLikes(postList.get(position).getPost_Id());
+                    viewHolderClass.likes.setText("좋아영: " + Integer.toString(postList.get(position).getLikes()) + "");
                 }
                 compoundButton.startAnimation(scaleAnimation);
             }
@@ -134,7 +143,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return contentList.size();
+        return postList.size();
     }
     public class ViewHolderClass extends RecyclerView.ViewHolder
     {
@@ -151,5 +160,37 @@ public class HelperAdapter extends RecyclerView.Adapter {
             imageView=(ImageView) itemView.findViewById(R.id.imageview);
             likeBtn=(CompoundButton) itemView.findViewById(R.id.likeBtn);
         }
+    }
+
+    public void increaseLikes(int fuckingId){
+        Intt temp = new Intt(fuckingId);
+        Call<Post> call = RetrofitClient.getInstance().getMyApi().upLike(temp);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                Log.i("fuck", "likes : hmm..." + response.body().getLikes());
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.i("fuck", "왜 안되지..?");
+            }
+        });
+    }
+
+    public void decreaseLikes(int fuckingId){
+        Intt temp = new Intt(fuckingId);
+        Call<Post> call = RetrofitClient.getInstance().getMyApi().downLike(temp);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                Log.i("fuck", "likes : hmm..."  + response.body().getLikes());
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.i("fuck", "왜 안되지..?");
+            }
+        });
     }
 }

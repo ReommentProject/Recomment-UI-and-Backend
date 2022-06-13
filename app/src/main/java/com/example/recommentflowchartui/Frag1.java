@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recommentflowchartui.DTO.Post;
+import com.example.recommentflowchartui.DTO.Friend;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,14 +48,14 @@ public class Frag1 extends Fragment {
 
     private View getFriendsPosts(View view, String userId) {
 
-        Call<List<Content>> call = RetrofitClient.getInstance().getMyApi().getPosts();
+        Call<List<Post>> call = RetrofitClient.getInstance().getMyApi().getPosts();
 //        Call<List<Friend>> call2 = RetrofitClient.getInstance().getMyApi().getFriends();
 
-        call.enqueue(new Callback<List<Content>>() {
+        call.enqueue(new Callback<List<Post>>() {
             @Override
-            public void onResponse(Call<List<Content>> call, Response<List<Content>> response) {
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
-                List<Content> postList = response.body();
+                List<Post> postList = response.body();
 
                 Call<List<Friend>> call2 = RetrofitClient.getInstance().getMyApi().getFriends();
                 call2.enqueue(new Callback<List<Friend>>() {
@@ -60,7 +63,7 @@ public class Frag1 extends Fragment {
                     public void onResponse(Call<List<Friend>> call2, Response<List<Friend>> response2) {
                         List<Friend> friendsList = response2.body();
 
-                        List<Content> friendsPostList = new ArrayList<>();
+                        List<Post> friendsPostList = new ArrayList<>();
                         List<Friend> myFriendList = new ArrayList<>();
 //
                         Log.d("fuckIDID",userId);
@@ -101,7 +104,7 @@ public class Frag1 extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Content>> call, Throwable t) {
+            public void onFailure(Call<List<Post>> call, Throwable t) {
                 Toast.makeText(getContext(), "An error has occured in get", Toast.LENGTH_LONG).show();
             }
 

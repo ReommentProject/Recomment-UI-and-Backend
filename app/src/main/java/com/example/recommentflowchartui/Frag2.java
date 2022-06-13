@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.recommentflowchartui.DTO.Post;
 
 import java.util.List;
 
@@ -41,13 +41,13 @@ public class Frag2 extends Fragment {
 
     private View getPosts(View view) {
 
-        Call<List<Content>> call = RetrofitClient.getInstance().getMyApi().getPosts();
+        Call<List<Post>> call = RetrofitClient.getInstance().getMyApi().getPosts();
 
-        call.enqueue(new Callback<List<Content>>() {
+        call.enqueue(new Callback<List<Post>>() {
             @Override
-            public void onResponse(Call<List<Content>> call, Response<List<Content>> response) {
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
-                List<Content> postList = response.body();
+                List<Post> postList = response.body();
 
                 Log.i("fuck", ""+response.body().size());
 
@@ -58,7 +58,7 @@ public class Frag2 extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Content>> call, Throwable t) {
+            public void onFailure(Call<List<Post>> call, Throwable t) {
                 Toast.makeText(getContext(), "An error has occured in get", Toast.LENGTH_LONG).show();
             }
 

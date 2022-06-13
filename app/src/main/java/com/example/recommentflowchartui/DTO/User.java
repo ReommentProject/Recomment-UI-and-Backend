@@ -1,4 +1,4 @@
-package com.example.recommentflowchartui;
+package com.example.recommentflowchartui.DTO;
 
 import com.google.gson.annotations.SerializedName;
 
