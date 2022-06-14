@@ -2,25 +2,36 @@ package com.example.recommentflowchartui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recommentflowchartui.DTO.Intt;
 import com.example.recommentflowchartui.DTO.Post;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class post_page extends YouTubeBaseActivity {
     private Button comment;
-    private ImageView profile, thumbnail;
-    private TextView title, review;
+    private ImageView profile;
+    private TextView title, review, name;
     private YouTubePlayerView ytPlayer;
+    private CompoundButton likeBtn;
 
     String api_key = "AIzaSyAgwRo5cX1rkybuFWkGtVIWGRzAumSbeb4";
 
@@ -35,8 +46,8 @@ public class post_page extends YouTubeBaseActivity {
 //        actionBar.hide();
         initView();
         setEvent();
-
         Post post = (Post) getIntent().getSerializableExtra("this_post");
+
         // 섬네일 작업
         String url = post.getThumbnail();
         String id = url.substring(17);  //맨마지막 '/'뒤에 id가있으므로 그것만 파싱해줌
@@ -49,6 +60,28 @@ public class post_page extends YouTubeBaseActivity {
         review.setText(post.getContent());
 
         showYoutube(id);
+
+        ScaleAnimation scaleAnimation;
+        BounceInterpolator bounceInterpolator;//애니메이션이 일어나는 동안의 회수, 속도를 조절하거나 시작과 종료시의 효과를 추가 할 수 있다
+
+        scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
+
+        scaleAnimation.setDuration(500);
+        bounceInterpolator = new BounceInterpolator();
+        scaleAnimation.setInterpolator(bounceInterpolator);
+
+        likeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    increaseLikes(post.getPost_Id());
+                }else{
+                    decreaseLikes(post.getPost_Id());
+                }
+                compoundButton.startAnimation(scaleAnimation);
+            }
+        });
+        name.setText(post.getUser_Id());
     }
 
     private void initView(){
@@ -58,6 +91,8 @@ public class post_page extends YouTubeBaseActivity {
         title=(TextView) findViewById(R.id.title);
         review=(TextView) findViewById(R.id.review);
         ytPlayer=(YouTubePlayerView) findViewById(R.id.ytPlayer);
+        likeBtn=(CompoundButton) findViewById(R.id.likeBtn);
+        name=(TextView) findViewById(R.id.name);
     }
 
     private void setEvent(){
@@ -108,5 +143,37 @@ public class post_page extends YouTubeBaseActivity {
                         Toast.makeText(getApplicationContext(), "Video player Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void increaseLikes(int fuckingId){
+        Intt temp = new Intt(fuckingId);
+        Call<Post> call = RetrofitClient.getInstance().getMyApi().upLike(temp);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                Log.i("fuck", "likes : hmm..." + response.body().getLikes());
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.i("fuck", "왜 안되지..?");
+            }
+        });
+    }
+
+    public void decreaseLikes(int fuckingId){
+        Intt temp = new Intt(fuckingId);
+        Call<Post> call = RetrofitClient.getInstance().getMyApi().downLike(temp);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                Log.i("fuck", "likes : hmm..."  + response.body().getLikes());
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.i("fuck", "왜 안되지..?");
+            }
+        });
     }
 }
