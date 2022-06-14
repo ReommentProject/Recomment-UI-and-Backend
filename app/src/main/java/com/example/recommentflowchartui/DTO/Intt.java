@@ -2,7 +2,9 @@ package com.example.recommentflowchartui.DTO;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Intt {
+import java.io.Serializable;
+
+public class Intt implements Serializable {
     @SerializedName("id")
     private int post_Id;
 

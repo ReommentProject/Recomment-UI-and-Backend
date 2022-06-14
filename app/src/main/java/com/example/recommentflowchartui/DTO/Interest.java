@@ -4,25 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Friend implements Serializable {
+public class Interest implements Serializable {
 
     @SerializedName("userId")
     private String user_Id;
 
-    @SerializedName("friendId")
-    private String friend_Id;
+    @SerializedName("interest")
+    private String singleInterest;
 
 
-    public Friend(String user_Id, String friend_Id) {
+    public Interest(String user_Id, String singleInterest) {
         this.user_Id = user_Id;
-        this.friend_Id = friend_Id;
+        this.singleInterest = singleInterest;
     }
 
     public String getUser_Id() {
         return user_Id;
     }
 
-    public String getFriend_Id() {
-        return friend_Id;
+    public String getSingleInterest() {
+        return singleInterest;
     }
 }

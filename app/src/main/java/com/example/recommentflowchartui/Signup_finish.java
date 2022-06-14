@@ -92,3 +92,27 @@ public class Signup_finish extends AppCompatActivity {
         });
     }
 }
+
+//while (i > 0) {
+//        Interest temp = new Interest(userId, "test" + i);
+//
+//        Call<Interest> call = RetrofitClient.getInstance().getMyApi().createInterest(temp);
+//        call.enqueue(new Callback<Interest>() {
+//@Override
+//public void onResponse(Call<Interest> call, Response<Interest> response) {
+//        Log.i("fuck", "likes : hmm..." + response.body());
+//        }
+//
+//@Override
+//public void onFailure(Call<Interest> call, Throwable t) {
+//        Log.i("fuck", "왜 안되지..?");
+//        }
+//        });
+//
+//        i--;
+//        }
+
+
+//    String userId = cUser.getUser_Id(); // 회원가입하는 유저 가져오기
+//    int i = listViewData.getCount(); // 체크된 개수 구하기
+//// 체크 된 개수 만큼 userId에 흥미 추가
