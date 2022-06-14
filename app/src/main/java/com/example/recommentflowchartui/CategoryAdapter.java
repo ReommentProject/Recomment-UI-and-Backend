@@ -63,7 +63,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
                     int currentPos=getAdapterPosition();
                     CategoryData categoryData=arrayList.get(currentPos);
                     Intent intent=new Intent(mContext,CategoryVideoList.class);
+                    //intent.putExtra("userId", userId);
                     mContext.startActivity(intent);
+
 
                 }
             });
