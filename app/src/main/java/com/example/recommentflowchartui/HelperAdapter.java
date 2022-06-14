@@ -35,6 +35,7 @@ import retrofit2.Response;
 public class HelperAdapter extends RecyclerView.Adapter {
     Context context;
     List<Post> postList;
+    String category;
 
     public HelperAdapter(Context context, List<Post> postList) {
         this.context = context;
