@@ -71,7 +71,7 @@ public class Frag3 extends Fragment {
 
 
                 for(int i=0; i<interestList.size();i++){
-                    CategoryData categoryData=new CategoryData(R.drawable.star,interestList.get(i).getSingleInterest());
+                    CategoryData categoryData=new CategoryData(R.drawable.star,interestList.get(i).getSingleInterest(), userId);
                     arrayList.add(categoryData);
                 }
 

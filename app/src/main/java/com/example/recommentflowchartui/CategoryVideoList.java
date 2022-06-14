@@ -43,6 +43,7 @@ public class CategoryVideoList extends AppCompatActivity {
         linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         String categoryName = (String) getIntent().getSerializableExtra("category");
+        String userId = (String) getIntent().getSerializableExtra("userId");
 
 
 
@@ -55,16 +56,11 @@ public class CategoryVideoList extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
                 List<Post> postList = response.body();
-
-
-
-                Log.i("fuckcategory", categoryName);
+                
                 arrayList=new ArrayList<>();
                 for(int i=0;i<postList.size();i++){
                     Log.i("fuckthiscategory",postList.get(i).getInterest());
-                    if(postList.get(i).getInterest().equals(categoryName)&&postList.get(i).getUser_Id().equals("user2")){
-                        Log.i("fuckyes","yes");
-
+                    if(postList.get(i).getInterest().equals(categoryName)&&postList.get(i).getUser_Id().equals(userId)){
                         arrayList.add(postList.get(i));
                     }
                 }
