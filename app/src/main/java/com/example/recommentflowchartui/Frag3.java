@@ -2,11 +2,13 @@ package com.example.recommentflowchartui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +16,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recommentflowchartui.DTO.Friend;
+import com.example.recommentflowchartui.DTO.Interest;
+import com.example.recommentflowchartui.DTO.Post;
+import com.example.recommentflowchartui.DTO.Stringring;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Frag3 extends Fragment {
 
@@ -42,8 +54,6 @@ public class Frag3 extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList=new ArrayList<>();
-        categoryAdapter=new CategoryAdapter(arrayList);
-        recyclerView.setAdapter(categoryAdapter);
 
         //RequestActivity에서 전달한 번들 저장
         Bundle bundle = getArguments();
@@ -51,11 +61,30 @@ public class Frag3 extends Fragment {
         String userId = bundle.getString("userId");
 
 
-        for(int i=0 ; i<10 ; i++)
-        {
-            CategoryData categoryData=new CategoryData(R.drawable.star,"카테고리");
-            arrayList.add(categoryData);
-        }
+        Stringring userid=new Stringring(userId);
+        Call<List<Interest>> call = RetrofitClient.getInstance().getMyApi().getInterestByUserId(userid);
+        call.enqueue(new Callback<List<Interest>>() {
+            @Override
+            public void onResponse(Call<List<Interest>> call, Response<List<Interest>> response) {
+
+                List<Interest> interestList = response.body();
+
+
+                for(int i=0; i<interestList.size();i++){
+                    CategoryData categoryData=new CategoryData(R.drawable.star,interestList.get(i).getSingleInterest());
+                    arrayList.add(categoryData);
+                }
+
+                categoryAdapter=new CategoryAdapter(arrayList);
+                recyclerView.setAdapter(categoryAdapter);
+
+            }
+            @Override
+            public void onFailure(Call<List<Interest>> call, Throwable t) {
+                Toast.makeText(getContext(), "An error has occured in get", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override

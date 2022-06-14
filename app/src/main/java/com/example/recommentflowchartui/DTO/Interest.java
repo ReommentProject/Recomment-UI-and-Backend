@@ -9,7 +9,7 @@ public class Interest implements Serializable {
     @SerializedName("userId")
     private String user_Id;
 
-    @SerializedName("interest")
+    @SerializedName("Interests")
     private String singleInterest;
 
 
