@@ -11,6 +11,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -55,6 +56,10 @@ public interface Api {
     // 모든 친구 가져오기
     @GET("friend")
     Call<List<Friend>> getFriends();
+
+    // 친구 삭제하기
+    @DELETE("friend/{id}/{rel}")
+    Call<Friend> deleteOneFriend(@Path("id") String userId, @Path("rel") String friendId);
 
     // interest
     // 유저 아이디로 관심분야 가져오기

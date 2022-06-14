@@ -48,16 +48,12 @@ public class Friendlist extends AppCompatActivity {
 
     private void getFriends(List<friendData> array) {
 
-
         String userId = (String) getIntent().getSerializableExtra("userId");
-
 
         Log.d("fuckuserId", userId);
 //        Intent intent=new Intent(Signup_page2.this,Signup_finish.class);
 //        intent.putExtra("createdUser", cUser);
 //        startActivity(intent);
-
-
 
         Call<List<Friend>> call = RetrofitClient.getInstance().getMyApi().getFriends();
 
@@ -67,14 +63,13 @@ public class Friendlist extends AppCompatActivity {
 
                 List<Friend> friendsList = response.body();
 
-                for(int i=0;i<friendsList.size();i++){
-                    if(friendsList.get(i).getUser_Id().equals(userId)) {
+                for (int i = 0; i < friendsList.size(); i++) {
+                    if (friendsList.get(i).getUser_Id().equals(userId)) {
                         String myFriend = friendsList.get(i).getFriend_Id();
-                        friendData friend1 = new friendData(R.mipmap.ic_launcher, "" + myFriend, "fuck!");
+                        friendData friend1 = new friendData(R.mipmap.ic_launcher, "" + myFriend, "fuck!", userId);
                         array.add(friend1);
                     }
                 }
-
                 friendAdapter = new FriendAdapter(arrayList);
                 recyclerView.setAdapter(friendAdapter);
             }
@@ -83,9 +78,7 @@ public class Friendlist extends AppCompatActivity {
             public void onFailure(Call<List<Friend>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "An error has occured in get", Toast.LENGTH_LONG).show();
             }
-
         });
-
     }
 }
 

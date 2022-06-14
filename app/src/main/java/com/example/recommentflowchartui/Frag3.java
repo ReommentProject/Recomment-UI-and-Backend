@@ -81,8 +81,6 @@ public class Frag3 extends Fragment {
                 Intent intent=new Intent(getActivity(),Friendlist.class);
                 intent.putExtra("userId", userId);
                 startActivity(intent);
-
-
             }
         });
 
