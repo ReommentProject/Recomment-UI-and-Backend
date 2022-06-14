@@ -41,10 +41,14 @@ public class Friendlist extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList = new ArrayList<>();
-
-        getFriends(arrayList);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        arrayList.clear();
+        getFriends(arrayList);
+    }
 
     private void getFriends(List<friendData> array) {
 

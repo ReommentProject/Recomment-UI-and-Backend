@@ -105,6 +105,7 @@ public class FriendPage extends AppCompatActivity {
 //                Intent intent=new Intent(Loginpage.this,Mainpage.class);
 //                intent.putExtra("userId", userId);
 //                startActivity(intent);
+                finish();
                 Log.i("fuck", "friend delete succeed");
             }
 
