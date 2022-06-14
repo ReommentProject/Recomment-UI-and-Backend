@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recommentflowchartui.DTO.Post;
+import com.example.recommentflowchartui.DTO.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,11 @@ import retrofit2.Response;
 
 public class CategoryVideoList extends AppCompatActivity {
 
-    private ArrayList<CategoryVideoData> arrayList;
+    private ArrayList<Post> arrayList;
     private CategoryVideoAdapter categoryVideoAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class CategoryVideoList extends AppCompatActivity {
         recyclerView=(RecyclerView) findViewById(R.id.categoryvideo);
         linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
+        String categoryName = (String) getIntent().getSerializableExtra("category");
 
 
 
@@ -55,10 +58,19 @@ public class CategoryVideoList extends AppCompatActivity {
 
 
 
-                List<Post> postListByCategory;
+                Log.i("fuckcategory", categoryName);
+                arrayList=new ArrayList<>();
                 for(int i=0;i<postList.size();i++){
+                    Log.i("fuckthiscategory",postList.get(i).getInterest());
+                    if(postList.get(i).getInterest().equals(categoryName)&&postList.get(i).getUser_Id().equals("user2")){
+                        Log.i("fuckyes","yes");
+
+                        arrayList.add(postList.get(i));
+                    }
                 }
-                HelperAdapter helperAdapter = new HelperAdapter(temp, postList);
+
+
+                HelperAdapter helperAdapter = new HelperAdapter(temp, arrayList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(temp);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(helperAdapter);
