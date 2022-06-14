@@ -52,6 +52,12 @@ public class CategoryVideoList extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
                 List<Post> postList = response.body();
+
+
+
+                List<Post> postListByCategory;
+                for(int i=0;i<postList.size();i++){
+                }
                 HelperAdapter helperAdapter = new HelperAdapter(temp, postList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(temp);
                 recyclerView.setLayoutManager(linearLayoutManager);

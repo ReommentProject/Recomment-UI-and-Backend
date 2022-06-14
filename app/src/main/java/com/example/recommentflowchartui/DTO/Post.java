@@ -27,6 +27,9 @@ public class Post implements Serializable {
     @SerializedName("link")
     private String link;
 
+    @SerializedName("interest")
+    private String interest;
+
     @SerializedName("createdAt")
     private String createdTime;
 
@@ -42,6 +45,19 @@ public class Post implements Serializable {
         this.content = content;
         this.thumbnail = thumbnail;
         this.link = link;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
+    }
+
+    public Post(int post_Id, String user_Id, int likes, String title, String content, String thumbnail, String link, String interest, String createdTime, String updatedTime) {
+        this.post_Id = post_Id;
+        this.user_Id = user_Id;
+        this.likes = likes;
+        this.title = title;
+        this.content = content;
+        this.thumbnail = thumbnail;
+        this.link = link;
+        this.interest = interest;
         this.createdTime = createdTime;
         this.updatedTime = updatedTime;
     }
@@ -72,6 +88,10 @@ public class Post implements Serializable {
 
     public String getLink() {
         return link;
+    }
+
+    public String getInterest() {
+        return interest;
     }
 
     public String getCreatedTime() {

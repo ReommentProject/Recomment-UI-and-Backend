@@ -21,7 +21,7 @@ public interface Api {
     // 노바 동방 전용
     String BASE_URL = "http://113.198.137.183:7999/";
     // 애니웨얼
-//    String BASE_URL = "http://118.46.38.174:8000/";
+  //  String BASE_URL = "http://118.46.38.174:8000/";
 
 //    String BASE_URL = "http:/172.30.3.186:9001/";
 

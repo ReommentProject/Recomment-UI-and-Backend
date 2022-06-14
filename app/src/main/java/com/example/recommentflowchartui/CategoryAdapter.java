@@ -39,7 +39,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
         holder.cname.setText(arrayList.get(position).getName());
         holder.itemView.setTag(position);
 
-
     }
 
     @Override
