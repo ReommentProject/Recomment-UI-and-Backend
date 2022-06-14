@@ -31,10 +31,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
     @NonNull
     @Override
     public FriendAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        mContext=parent.getContext();
+        mContext = parent.getContext();
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friendlist,parent,false);
-        CustomViewHolder holder=new CustomViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friendlist, parent, false);
+        CustomViewHolder holder = new CustomViewHolder(view);
         return holder;
     }
 
@@ -50,9 +50,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
 
     @Override
     public int getItemCount() {
-        return (null !=arrayList ? arrayList.size():0);
+        return (null != arrayList ? arrayList.size() : 0);
     }
-
 
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -60,19 +59,23 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         protected ImageView fprofile;
         protected TextView name;
         protected TextView content;
+
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.fprofile=(ImageView) itemView.findViewById(R.id.fprofile);
-            this.name=(TextView) itemView.findViewById(R.id.name);
-            this.content=(TextView) itemView.findViewById(R.id.content);
+            this.fprofile = (ImageView) itemView.findViewById(R.id.fprofile);
+            this.name = (TextView) itemView.findViewById(R.id.name);
+            this.content = (TextView) itemView.findViewById(R.id.content);
             fprofile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int currentPos=getAdapterPosition();
-                    friendData friendData=arrayList.get(currentPos);
-                    Intent intent=new Intent(mContext,FriendPage.class);
-                    mContext.startActivity(intent);
+                    int currentPos = getAdapterPosition();
+                    friendData friendData = arrayList.get(currentPos);
+                    Intent intent = new Intent(mContext, FriendPage.class);
 
+                    intent.putExtra("userId", friendData.getOwner());
+                    intent.putExtra("friendId", friendData.getName());
+
+                    mContext.startActivity(intent);
                 }
             });
         }

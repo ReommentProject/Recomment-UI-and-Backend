@@ -5,11 +5,13 @@ public class friendData {
     private int fprofile;
     private String name;
     private String content;
+    private String owner;
 
-    public friendData(int fprofile, String name, String content) {
+    public friendData(int fprofile, String name, String content, String owner) {
         this.fprofile = fprofile;
         this.name = name;
         this.content = content;
+        this.owner = owner;
     }
     public friendData(int fprofile, String name) {
         this.fprofile = fprofile;
@@ -40,4 +42,6 @@ public class friendData {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getOwner() { return owner; }
 }
