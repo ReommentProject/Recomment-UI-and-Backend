@@ -16,7 +16,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recommentflowchartui.DTO.Interest;
 import com.example.recommentflowchartui.DTO.User;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,12 +49,12 @@ public class Signup_finish extends AppCompatActivity {
 
 
                     User cUser = (User) getIntent().getSerializableExtra("createdUser");
-
+                    ArrayList<String> interestList = (ArrayList<String>) getIntent().getSerializableExtra("interestList");
 
                     Intent intent = getIntent();
                     cUser.setIntroduce(str);
                     Log.i("fuck", cUser.getNickname());
-                    createUser(cUser);
+                    createUser(cUser, interestList);
 
                     customToastView("회원가입 완료");
                     intent = new Intent(Signup_finish.this, Loginpage.class);
@@ -76,12 +79,32 @@ public class Signup_finish extends AppCompatActivity {
 
     }
 
-    private void createUser(User cUser) {
+    private void createUser(User cUser, ArrayList<String> interestList) {
 
         Call<User> call = RetrofitClient.getInstance().getMyApi().createUser(cUser);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                int i = interestList.size();
+                while(i > 0){
+                    Log.i("fuck", "interested At : " + interestList.get(i-1));
+                    Interest temp = new Interest(cUser.getUser_Id(), interestList.get(i-1));
+                    Call<Interest> call2 = RetrofitClient.getInstance().getMyApi().createInterest(temp);
+                    call2.enqueue(new Callback<Interest>() {
+                        @Override
+                        public void onResponse(Call<Interest> call, Response<Interest> response) {
+                            Log.i("fuck", "likes : hmm..." + response.body());
+                        }
+
+                        @Override
+                        public void onFailure(Call<Interest> call, Throwable t) {
+                            Log.i("fuck", "왜 안되지..?");
+                        }
+                    });
+
+                    i--;
+                }
+
                 Log.i("fuck 회원가입 성공", "" + response.body().getNickname());
             }
 

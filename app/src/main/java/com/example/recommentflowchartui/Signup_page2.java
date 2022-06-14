@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +62,7 @@ public class Signup_page2 extends AppCompatActivity {
 
                 Intent intent = new Intent(Signup_page2.this, Signup_finish.class);
                 intent.putExtra("createdUser", cUser);
+                intent.putExtra("interestList", interestList);
                 startActivity(intent);
             }
         });
@@ -69,7 +71,12 @@ public class Signup_page2 extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("fuck", "checked item : " + parent.getItemAtPosition(position));
-                interestList.add(parent.getItemAtPosition(position)+"");
+                CheckedTextView testViewing = (CheckedTextView) view;
+                if(testViewing.isChecked()){
+                    interestList.add(parent.getItemAtPosition(position)+"");
+                } else {
+                    interestList.remove(parent.getItemAtPosition(position)+"");
+                }
             }
         });
 
