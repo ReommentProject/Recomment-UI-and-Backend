@@ -44,6 +44,10 @@ public interface Api {
     @GET("post")
     Call<List<Post>> getPosts();
 
+    // 포스트 생성
+    @POST("post")
+    Call<Post> createPost(@Body Post post);
+
     // 좋아요 1 올리기
     @POST("post/upLike")
     Call<Post> upLike(@Body Intt id);

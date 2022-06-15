@@ -56,7 +56,7 @@ public class CategoryVideoList extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
                 List<Post> postList = response.body();
-                
+
                 arrayList=new ArrayList<>();
                 for(int i=0;i<postList.size();i++){
                     Log.i("fuckthiscategory",postList.get(i).getInterest());

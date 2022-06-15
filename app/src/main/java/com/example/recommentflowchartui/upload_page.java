@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recommentflowchartui.DTO.Post;
+
 public class upload_page extends AppCompatActivity {
     private Button category_bt;
     private EditText link,title,review;
@@ -43,8 +45,14 @@ public class upload_page extends AppCompatActivity {
 
                 if((str1.length()!=0)&&(str2.length()!=0)&&(str3.length()!=0))
                 {
+                    Post newPost = new Post();
+                    newPost.setUser_Id(userId);
+                    newPost.setLink(str1);
+                    newPost.setThumbnail(str1);
+                    newPost.setTitle(str2);
+                    newPost.setContent(str3);
                     Intent intent=new Intent(upload_page.this,uploadcategory.class);
-                    intent.putExtra("userId", userId);
+                    intent.putExtra("newPost", newPost);
                     startActivity(intent);
                 }
                 else

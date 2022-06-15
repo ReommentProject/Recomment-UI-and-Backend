@@ -14,13 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recommentflowchartui.DTO.Interest;
+import com.example.recommentflowchartui.DTO.Post;
 import com.example.recommentflowchartui.DTO.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +34,7 @@ import retrofit2.Response;
 
 public class uploadcategory extends AppCompatActivity {
     private Button finishupload;
+    private String category;
     ListView listViewData;
     ArrayAdapter<String>adapter;
     String[]arrayPeliculas={"Science" , "History" ,"Sports" ,"Music" ,"Entertainment" ,"Game" , "Animal" ,"Cooking" ,"Movie" ,"Drama"};
@@ -44,7 +51,21 @@ public class uploadcategory extends AppCompatActivity {
         adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice,arrayPeliculas);
         listViewData.setAdapter(adapter);
         String userId = (String) getIntent().getSerializableExtra("userId");
-        Log.d("fuckgetid",userId);
+
+
+
+        listViewData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("fuck", "checked item : " + parent.getItemAtPosition(position));
+                CheckedTextView testViewing = (CheckedTextView) view;
+                category = testViewing.getText().toString();
+            }
+        });
+
+
+
+
         finishupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +77,32 @@ public class uploadcategory extends AppCompatActivity {
 
                     Intent intent=new Intent(uploadcategory.this,Mainpage.class);
                     intent.putExtra("createdUser", cUser);
+                    startActivity(intent);
+                }
+
+                else if (getIntent().getSerializableExtra("newPost") != null) {
+                    Post newPost = (Post) getIntent().getSerializableExtra("newPost");
+
+                    Log.d("fuckgetnewpostthumbnail",newPost.getThumbnail());
+
+                    newPost.setInterest(category);
+
+                    Call<Post> call = RetrofitClient.getInstance().getMyApi().createPost(newPost);
+                    call.enqueue(new Callback<Post>() {
+                        @Override
+                        public void onResponse(Call<Post> call, Response<Post> response) {
+
+                            Log.i("fucksuccesscreatepost", response.body().getThumbnail());
+                        }
+                        @Override
+                        public void onFailure(Call<Post> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "An error has occured in get", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+
+                    Intent intent=new Intent(uploadcategory.this,Mainpage.class);
+                    intent.putExtra("userId", newPost.getUser_Id());
                     startActivity(intent);
                 }
 
@@ -84,7 +131,7 @@ public class uploadcategory extends AppCompatActivity {
             }
         });
 
-
+        //https://youtu.be/4A6oBIu5-B8
     }
 
     @Override

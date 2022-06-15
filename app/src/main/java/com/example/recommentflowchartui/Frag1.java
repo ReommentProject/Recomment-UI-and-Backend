@@ -38,6 +38,7 @@ public class Frag1 extends Fragment {
         String userId = bundle.getString("userId");
 
 
+
         return getFriendsPosts(view, userId);
 
 //        Log.i("fuck", "image size : "+images.size());
@@ -69,8 +70,8 @@ public class Frag1 extends Fragment {
                         Log.d("fuckIDID",userId);
 
                         for(int i=0;i<friendsList.size();i++){
-                            if(friendsList.get(i).getUser_Id().equals(userId)) {
-                                myFriendList.add(friendsList.get(i));
+                                if(friendsList.get(i).getUser_Id().equals(userId)) {
+                                    myFriendList.add(friendsList.get(i));
                             }
                         }
 
@@ -83,6 +84,8 @@ public class Frag1 extends Fragment {
                                     friendsPostList.add(postList.get(j));
                                 }
                             }
+                            if(userId.equals(postList.get(j).getUser_Id()))
+                                friendsPostList.add(postList.get(j));
                         }
 
 

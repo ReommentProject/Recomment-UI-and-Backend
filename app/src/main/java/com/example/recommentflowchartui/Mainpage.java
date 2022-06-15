@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import com.example.recommentflowchartui.DTO.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class Mainpage extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -45,6 +47,10 @@ public class Mainpage extends AppCompatActivity {
         }
         Bundle bundle = new Bundle();
         bundle.putString("userId",userId);
+
+        if(getIntent().getSerializableExtra("userId")!=null){
+            bundle.putString("userId",getIntent().getSerializableExtra("userId").toString());
+        }
         Fragment fragment = new Frag1();
         fragment.setArguments(bundle);
 

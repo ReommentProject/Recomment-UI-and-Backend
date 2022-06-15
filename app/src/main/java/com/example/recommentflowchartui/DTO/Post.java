@@ -62,6 +62,10 @@ public class Post implements Serializable {
         this.updatedTime = updatedTime;
     }
 
+    public Post() {
+        this.likes = 0;
+    }
+
     public int getPost_Id() {
         return post_Id;
     }
@@ -100,5 +104,46 @@ public class Post implements Serializable {
 
     public String getUpdatedTime() {
         return updatedTime;
+    }
+
+
+    public void setPost_Id(int post_Id) {
+        this.post_Id = post_Id;
+    }
+
+    public void setUser_Id(String user_Id) {
+        this.user_Id = user_Id;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setInterest(String interest) {
+        this.interest = interest;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public void setUpdatedTime(String updatedTime) {
+        this.updatedTime = updatedTime;
     }
 }
