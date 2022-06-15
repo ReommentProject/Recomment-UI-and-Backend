@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recommentflowchartui.DTO.Friend;
+import com.example.recommentflowchartui.DTO.Interest;
+import com.example.recommentflowchartui.DTO.Post;
+import com.example.recommentflowchartui.DTO.Stringring;
+import com.example.recommentflowchartui.DTO.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,10 @@ public class FriendPage extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private TextView friendprofile;
+    private TextView Nickname;
+    private String friendNick;
+
+
 
 
     @Override
@@ -43,16 +51,26 @@ public class FriendPage extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
 
-        initView();
-        setRecyclerView();
+        Nickname=(TextView) findViewById(R.id.nickname);
+
+        String userId =  getIntent().getSerializableExtra("userId").toString();
+        String friendId = getIntent().getSerializableExtra("friendId").toString();
+        friendNick = getIntent().getSerializableExtra("friendNick").toString();
+        User friend;
+
+        initView(friendId);
+        setRecyclerView(friendId);
         setOnclick();
     }
 
-    private void initView(){
+    private void initView(String friendId){
         friendlist=(Button) findViewById(R.id.seefriend);
         breakfriend=(Button) findViewById(R.id.breakfriend);
         friendprofile=(TextView)findViewById(R.id.friendprofile);
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView4);
+        Nickname.setText(friendNick);
+
+
     }
 
     private void setOnclick(){
@@ -79,18 +97,39 @@ public class FriendPage extends AppCompatActivity {
         });
     }
 
-    private void setRecyclerView(){
+    private void setRecyclerView(String friendId){
         linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         arrayList=new ArrayList<>();
-        categoryAdapter=new CategoryAdapter(arrayList);
-        recyclerView.setAdapter(categoryAdapter);
-        for(int i=0 ; i<10 ; i++)
-        {
-            CategoryData categoryData=new CategoryData(R.drawable.star,"카테고리");
-            arrayList.add(categoryData);
-        }
+
+        Stringring userid=new Stringring(friendId);
+        Call<List<Interest>> call2 = RetrofitClient.getInstance().getMyApi().getInterestByUserId(userid);
+        call2.enqueue(new Callback<List<Interest>>() {
+            @Override
+            public void onResponse(Call<List<Interest>> call2, Response<List<Interest>> response) {
+
+                List<Interest> interestList = response.body();
+
+
+                for(int i=0; i<interestList.size();i++){
+                    CategoryData categoryData=new CategoryData(R.drawable.star,interestList.get(i).getSingleInterest(), friendId);
+                    arrayList.add(categoryData);
+                }
+
+                categoryAdapter=new CategoryAdapter(arrayList);
+                recyclerView.setAdapter(categoryAdapter);
+
+            }
+            @Override
+            public void onFailure(Call<List<Interest>> call2, Throwable t) {
+                Toast.makeText(getApplicationContext(), "An error has occured in get", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+
     }
 
     private void deleteFriend(){
