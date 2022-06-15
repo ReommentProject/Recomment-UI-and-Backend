@@ -30,8 +30,10 @@ public class Frag2 extends Fragment {
         View view = inflater.inflate(R.layout.frag2, container, false);
         recyclerView2 = view.findViewById(R.id.recyclerView2);
 
+        Bundle bundle = getArguments();
+        String userId = bundle.getString("userId");
 
-        return getPosts(view);
+        return getPosts(view, userId);
 
 //        Log.i("fuck", "image size : "+images.size());
 //        Log.i("fuck", "name size : "+name.size());
@@ -39,7 +41,7 @@ public class Frag2 extends Fragment {
 
     }
 
-    private View getPosts(View view) {
+    private View getPosts(View view, String userId) {
 
         Call<List<Post>> call = RetrofitClient.getInstance().getMyApi().getPosts();
 
@@ -51,7 +53,7 @@ public class Frag2 extends Fragment {
 
                 Log.i("fuck", ""+response.body().size());
 
-                HelperAdapter helperAdapter = new HelperAdapter(getContext(), postList);
+                HelperAdapter helperAdapter = new HelperAdapter(getContext(), postList, userId);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 recyclerView2.setLayoutManager(linearLayoutManager);
                 recyclerView2.setAdapter(helperAdapter);

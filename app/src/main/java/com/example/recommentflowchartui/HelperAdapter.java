@@ -34,12 +34,19 @@ import retrofit2.Response;
 
 public class HelperAdapter extends RecyclerView.Adapter {
     Context context;
+    String userId;
     List<Post> postList;
     String category;
 
     public HelperAdapter(Context context, List<Post> postList) {
         this.context = context;
         this.postList = postList;
+    }
+
+    public HelperAdapter(Context context, List<Post> postList, String userId) {
+        this.context = context;
+        this.postList = postList;
+        this.userId = userId;
     }
 
     @NonNull
@@ -118,6 +125,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
                 Toast.makeText(context,"Item Selected",Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(context,post_page.class);
                 intent.putExtra("this_post", postList.get(position));
+                intent.putExtra("userId", userId);
                 context.startActivity(intent);
             }
         });

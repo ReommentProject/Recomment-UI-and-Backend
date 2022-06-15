@@ -90,7 +90,7 @@ public class Frag1 extends Fragment {
 
 
 
-                        HelperAdapter helperAdapter = new HelperAdapter(getContext(), friendsPostList);
+                        HelperAdapter helperAdapter = new HelperAdapter(getContext(), friendsPostList, userId);
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                         recyclerView.setLayoutManager(linearLayoutManager);
                         recyclerView.setAdapter(helperAdapter);

@@ -106,12 +106,33 @@
             android:textOff=""
             android:textOn=""/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentlist"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:scrollbarFadeDuration="0"
+            android:scrollbarSize="5dp"
+            android:scrollbarThumbVertical="@android:color/darker_gray">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/commentLine"/>
+
         <Button
             android:id="@+id/postcommment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/buttondesign2_1"
             android:text="Comment"
@@ -120,6 +141,4 @@
 
 
     </LinearLayout>
-
-
 </LinearLayout>

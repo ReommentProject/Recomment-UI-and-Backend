@@ -1,7 +1,9 @@
 package com.example.recommentflowchartui;
 
+import com.example.recommentflowchartui.DTO.Comment;
 import com.example.recommentflowchartui.DTO.Friend;
 import com.example.recommentflowchartui.DTO.Intt;
+import com.example.recommentflowchartui.DTO.Intt2;
 import com.example.recommentflowchartui.DTO.Post;
 import com.example.recommentflowchartui.DTO.Stringring;
 import com.example.recommentflowchartui.DTO.User;
@@ -22,7 +24,7 @@ public interface Api {
     // 노바 동방 전용
     String BASE_URL = "http://113.198.137.183:7999/";
     // 애니웨얼
-  //  String BASE_URL = "http://118.46.38.174:8000/";
+//    String BASE_URL = "http://118.46.38.174:8000/";
 
 //    String BASE_URL = "http:/172.30.3.186:9001/";
 
@@ -73,5 +75,14 @@ public interface Api {
     // 관심분야 추가하기
     @POST("interests")
     Call<Interest> createInterest(@Body Interest single);
+
+    //comment
+    // 댓글 작성
+    @POST("comment")
+    Call<Comment> createComment(@Body Comment recomments);
+
+    // 댓글 포스트 아이디로 불러오가
+    @POST("comment/usingpost")
+    Call<List<Comment>> getCommentByPostId(@Body Intt2 id);
 
 }
