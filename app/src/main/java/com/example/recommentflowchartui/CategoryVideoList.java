@@ -78,9 +78,6 @@ public class CategoryVideoList extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
                 Toast.makeText(temp, "An error has occured in get", Toast.LENGTH_LONG).show(); }
-
         });
-
-
     }
 }
