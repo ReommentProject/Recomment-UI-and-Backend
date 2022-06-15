@@ -85,8 +85,18 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
 
                             User friend = response.body();
                             Log.d("fuckFriendNick", friend.getNickname());
-                            friendNick=friend.getNickname();
-                            Log.d("fuckFriendNick2", friendNick);
+
+                            Intent intent = new Intent(mContext, FriendPage.class);
+                            Log.d("fuck owner", friendData.getOwner());
+
+                            friendNick = friend.getNickname();
+
+                            intent.putExtra("userId", friendData.getOwner());
+                            intent.putExtra("friendId", friendData.getName());
+                            Log.d("fuckthisisnick", ""+friendNick);
+                            intent.putExtra("friendNick", friendNick);
+
+                            mContext.startActivity(intent);
                         }
 
                         @Override
@@ -95,16 +105,6 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
                         }
 
                     });
-
-                    Intent intent = new Intent(mContext, FriendPage.class);
-                    Log.d("fuck owner", friendData.getOwner());
-
-                    intent.putExtra("userId", friendData.getOwner());
-                    intent.putExtra("friendId", friendData.getName());
-                    Log.d("fuckthisisnick", friendNick);
-                    intent.putExtra("friendNick", friendNick);
-
-                    mContext.startActivity(intent);
                 }
             });
 

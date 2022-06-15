@@ -51,14 +51,15 @@ public class FriendPage extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
 
-        Nickname=(TextView) findViewById(R.id.nickname);
 
         String userId =  getIntent().getSerializableExtra("userId").toString();
         String friendId = getIntent().getSerializableExtra("friendId").toString();
         friendNick = getIntent().getSerializableExtra("friendNick").toString();
+        Log.i("this is log", "friendNick : " + friendNick);
         User friend;
 
-        initView(friendId);
+        initView(friendNick);
+
         setRecyclerView(friendId);
         setOnclick();
     }
@@ -68,9 +69,8 @@ public class FriendPage extends AppCompatActivity {
         breakfriend=(Button) findViewById(R.id.breakfriend);
         friendprofile=(TextView)findViewById(R.id.friendprofile);
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView4);
-        Nickname.setText(friendNick);
-
-
+        Nickname=(TextView) findViewById(R.id.Friend);
+        Nickname.setText(friendId);
     }
 
     private void setOnclick(){
