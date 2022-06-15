@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -28,6 +29,7 @@ public class CategoryVideoList extends AppCompatActivity {
     private CategoryVideoAdapter categoryVideoAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+    private TextView categoryNameView;
 
 
     @Override
@@ -39,13 +41,14 @@ public class CategoryVideoList extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.hide();
 
+        categoryNameView = (TextView) findViewById(R.id.categoryName);
         recyclerView=(RecyclerView) findViewById(R.id.categoryvideo);
         linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         String categoryName = (String) getIntent().getSerializableExtra("category");
         String userId = (String) getIntent().getSerializableExtra("userId");
 
-
+        categoryNameView.setText(categoryName);
 
         Call<List<Post>> call = RetrofitClient.getInstance().getMyApi().getPosts();
 

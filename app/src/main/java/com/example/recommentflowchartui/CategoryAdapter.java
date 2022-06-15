@@ -65,8 +65,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
                     intent.putExtra("category", categoryData.getName());
                     intent.putExtra("userId", categoryData.getOwner());
                     mContext.startActivity(intent);
-
-
                 }
             });
         }
