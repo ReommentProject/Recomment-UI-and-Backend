@@ -44,8 +44,6 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         holder.name.setText(arrayList.get(position).getName());
         holder.content.setText(arrayList.get(position).getContent());
         holder.itemView.setTag(position);
-
-
     }
 
     @Override
