@@ -37,10 +37,7 @@ public class Frag3 extends Fragment {
     private CategoryAdapter categoryAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private TextView profile;
-
-
-
+    private TextView profile, nick;
 
     @Nullable
     @Override
@@ -49,6 +46,7 @@ public class Frag3 extends Fragment {
         friendlist=view.findViewById(R.id.seefriend);
         recomment=view.findViewById(R.id.goupload);
         profile=view.findViewById(R.id.myprofile);
+        nick=view.findViewById(R.id.mypagenick);
         recyclerView=view.findViewById(R.id.recyclerView3);
         linearLayoutManager=new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -60,6 +58,7 @@ public class Frag3 extends Fragment {
         //번들 안의 텍스트 불러오기
         String userId = bundle.getString("userId");
 
+        nick.setText(userId);
 
         Stringring userid=new Stringring(userId);
         Call<List<Interest>> call = RetrofitClient.getInstance().getMyApi().getInterestByUserId(userid);
