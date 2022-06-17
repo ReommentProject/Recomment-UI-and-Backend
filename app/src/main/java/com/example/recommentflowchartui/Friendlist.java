@@ -70,7 +70,7 @@ public class Friendlist extends AppCompatActivity {
                 for (int i = 0; i < friendsList.size(); i++) {
                     if (friendsList.get(i).getUser_Id().equals(userId)) {
                         String myFriend = friendsList.get(i).getFriend_Id();
-                        friendData friend1 = new friendData(R.mipmap.ic_launcher, "" + myFriend, "fuck!", userId);
+                        friendData friend1 = new friendData(R.mipmap.ic_launcher, "" + myFriend, "cbnu friend", userId);
                         array.add(friend1);
                     }
                 }

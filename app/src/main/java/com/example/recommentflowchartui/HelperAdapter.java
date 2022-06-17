@@ -90,7 +90,7 @@ public class HelperAdapter extends RecyclerView.Adapter {
             long month = week * 4;
             long year = month * 12;
 
-            long fuckfuck = Ntime-Wtime;
+            long fuckfuck = Ntime-Wtime-(9*hour);
 
             if(fuckfuck < minute){
                 viewHolderClass.writtenAt.setText((fuckfuck/second) + "초전");
